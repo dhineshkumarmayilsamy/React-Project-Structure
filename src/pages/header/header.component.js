@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
-import {useHistory} from 'react-router'
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { GlobalContext } from '../../context/GlobalState';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -9,7 +8,6 @@ export const Header = (props) => {
     // Global value
     const { appState, setToggle, setDarkMode } = useContext(GlobalContext);
     const auth = useAuth();
-    const history = useHistory()
 
     // Local value
     const [isToggled, setIsToggled] = useState(appState.isToggled);
@@ -33,19 +31,20 @@ export const Header = (props) => {
     }
 
     const signout = () => {
-        auth.signout();
-        history.push("/login")
+        auth.signout().then(()=>{
+            return(<Redirect to="/" />)
+        });
     }
 
 
 
     return (
-        <nav className={"sb-topnav navbar navbar-expand navbar-dark " + (isDarkMode ? "bg-dark" : "bg-nav-light")}>
+        <nav className={"sb-topnav navbar navbar-expand " + (isDarkMode ? "navbar-dark bg-dark" : "navbar-light")}>
             <NavLink className="navbar-brand" to="/home">
                 React
             </NavLink>
 
-            <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" onClick={() => toggleClass()}>
+            <button className="btn btn-link btn-sm order-0 order-lg-0" id="sidebarToggle" onClick={() => toggleClass()}>
                 <i className="fas fa-bars"></i>
             </button>
             <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -53,7 +52,7 @@ export const Header = (props) => {
             <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" onClick={() => toggleDarkMode()}>
                 <i className="fas fa-adjust"></i>
             </button>
-            <ul className="navbar-nav ml-auto ml-md-0">
+            <ul className="navbar-nav ml-auto ml-md-0 order-2 order-lg-0">
                 <li className="nav-item dropdown">
                     <NavLink to="#" className="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i className="fas fa-user fa-fw"></i>

@@ -11,7 +11,6 @@ const LoginLayout = ({ children }) => (
 const LoginLayoutRoute = ({ component: Component, ...rest }) => {
 
   const auth = useAuth();
-  console.log(auth);
   if (auth?.user?.isLoggedin === true) {
     return (<Redirect to="/home" />)
 

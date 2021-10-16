@@ -45,7 +45,6 @@ const HomeLayout = ({ children, ...rest }) => {
 
 const HomeLayoutRoute = ({ component: Component, ...rest }) => {
   const auth = useAuth();
-  console.log(auth);
   if(auth?.user?.isLoggedin === true){
     return (
       <Route

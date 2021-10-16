@@ -8,6 +8,12 @@ const initialState = {
 
 };
 
+(function(){
+    document.body.classList.add("dark-theme");
+    document.body.classList.remove("light-theme");
+
+})();
+
 export const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({ children }) => {
@@ -30,6 +36,16 @@ export const GlobalProvider = ({ children }) => {
             type: "SET_DARKMODE",
             payload: toggle
         });
+
+        if (toggle) {
+            document.body.classList.add("dark-theme");
+            document.body.classList.remove("light-theme");
+        }
+        else {
+            document.body.classList.add("light-theme");
+            document.body.classList.remove("dark-theme");
+        }
+            
     }
 
     return (

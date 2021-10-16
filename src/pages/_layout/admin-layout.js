@@ -11,7 +11,7 @@ const AdminLayout = ({ children, ...rest }) => {
       <div id="layoutSidenav">
 
         <div id="layoutSidenav_nav">
-          <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <nav className="sb-sidenav accordion sb-sidenav" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
               <div className="nav">
                 <div className="sb-sidenav-menu-heading">Heading</div>
@@ -44,7 +44,6 @@ const AdminLayout = ({ children, ...rest }) => {
 
 const AdminLayoutRoute = ({ component: Component, ...rest }) => {
   const auth = useAuth();
-  console.log(auth);
   if(auth?.user?.isLoggedin === true){
     return (
       <Route
